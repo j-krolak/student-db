@@ -7,7 +7,7 @@ name{name}, lastName{lastName},  address{address}, pesel{pesel}, gender{gender}
 {}
 
 bool Student::operator==(const Student & student){
-    unsigned char isEqual = 0;
+    unsigned char isEqual = 1;
     isEqual &= name == student.name;
     isEqual &= lastName == student.lastName;
     isEqual &= pesel == student.pesel;
