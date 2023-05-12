@@ -2,6 +2,8 @@
 #include "student.hpp"
 #include "database.hpp"
 
+using namespace std;
+
 Student johnny {
     "Johnny", 
     "Pancake", 
@@ -20,11 +22,20 @@ Student sharon {
 };
 
 
-Database db;
+Database db("db.txt");
 
 int main(){
-    db.insert(johnny);
-    db.insert(sharon);
-    std::cout << db.toString() << std::endl; 
+    int option = 0;
+    cin >> option;
+    if(option == 0){
+        db.insert(johnny);
+        db.insert(sharon);
+        std::cout << db.toString() << std::endl;
+        db.saveData(); 
+    }
+    else{
+        std::cout << db.toString() << std::endl;
+    }
+
     return 0;
 }

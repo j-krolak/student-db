@@ -17,8 +17,12 @@ bool Student::operator==(const Student & student){
     return isEqual>0;
 }
 
-std::string Student::toString(){
-    string student =  name + ' ' + lastName + ' ' + pesel + ' ' + address + ' ';
+std::string Student::toString(bool convertGender){
+    string student =  name + ';' + lastName + ';' + pesel + ';' + address + ';';
+    if(convertGender){
+        return student + to_string(static_cast<int>(gender));
+    }
+
     switch(gender){
         case Gender::Female:
             student += "Female";

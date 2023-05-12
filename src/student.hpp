@@ -10,7 +10,7 @@ class Student{
 public:
     Student(std::string name, std::string lastName, std::string address, std::string pesel, Gender gender);
     bool operator==(const Student & student);
-    std::string toString();
+    std::string toString(bool convertGender = true);
 
 private:
     Gender gender;

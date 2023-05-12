@@ -1,6 +1,7 @@
 #include "database.hpp"
 #include <math.h>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -86,4 +87,55 @@ std::string Database::toString(){
     }
 
     return db;
+}
+
+Database::Database(string dbPath):
+path{dbPath}
+{
+    loadData();
+}
+
+bool Database::saveData(){
+    ofstream fs(path.c_str());
+
+    if(!fs.is_open()){
+        return false;
+    }
+
+    for(auto & student : students){
+        fs << student.toString() + '\n';
+    }
+
+    fs.close();
+    return true;
+}
+
+bool Database::loadData(){
+    ifstream fs(path.c_str());
+    if(!fs.is_open()){
+        return false;
+    }
+    string name, lastName, pesel, address;
+    int gender;
+
+    string genderStr;
+
+    while(!fs.eof()){
+        getline(fs, name, ';');
+        getline(fs, lastName, ';');
+        getline(fs, pesel, ';');
+        getline(fs, address, ';');
+        if(!getline(fs, genderStr, '\n'))
+            break;
+       
+        gender = stoi(genderStr);
+        students.push_back(Student(name, lastName, address, pesel, static_cast<Gender>(gender)));
+    }
+
+    fs.close();
+    return true;
+}
+
+Database::~Database(){
+
 }
