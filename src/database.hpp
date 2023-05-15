@@ -7,7 +7,11 @@ class Database{
 public:
     Database()=default;
     Database(std::string dbPath);
+    Database(const Database & db);
     ~Database();
+
+    Database& operator=(const Database & db);
+    Database& operator=(const Database && db);
 
     bool insert(const Student & student);
     int find(const Student & student);

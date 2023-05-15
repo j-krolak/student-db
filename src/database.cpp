@@ -136,6 +136,28 @@ bool Database::loadData(){
     return true;
 }
 
+Database::Database(const Database & db){
+    students = db.students;
+    path = db.path;
+}
+
+Database& Database::operator=(const Database & db){
+    if(this != &db){
+        students = db.students;
+        path = db.path;
+    }
+
+    return *this;
+}
+
+Database& Database::operator=(const Database && db){
+    if(this != &db){
+        students = db.students;
+        path = db.path;
+    }
+    return *this;
+}
+
 Database::~Database(){
 
 }
